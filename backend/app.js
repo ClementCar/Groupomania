@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-app.use(express.json());
+
 
 // Création des en-têtes
 app.use((req, res, next) => {
