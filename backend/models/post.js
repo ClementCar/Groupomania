@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.post.belongTo(Models.User, {
-        foreignKey: {
-          allowNul: false
-        }
-      })
+      // models.post.belongsTo(models.User, {
+      //   foreignKey: {
+      //     allowNul: false
+      //   }
+      // })
     }
   }
   post.init({

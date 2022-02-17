@@ -1,9 +1,14 @@
 const express = require('express');
 const app = express();
 const { Sequelize } = require('sequelize');
+const bodyParser = require('body-parser');
 
+const userRoutes = require('./routes/user');
 
-app.use(express.json())
+// app.use(express.json())
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Création des en-têtes
 app.use((req, res, next) => {
@@ -13,20 +18,22 @@ app.use((req, res, next) => {
     next();
 });
 
-const sequelize = new Sequelize('Groupomania', 'root', 'SQLmotDEpasse20', {
-    dialect: 'mysql',
-    host: 'localhost'
-});
+// const sequelize = new Sequelize('', 'root', 'SQLmotDEpasse20', {
+//     dialect: 'mysql',
+//     host: 'localhost'
+// });
 
-try {
-    sequelize.authenticate();
-    console.log('Connecté à la base de données MySQL !');
-    // sequelize.query('CREATE DATABASE `Groupomania`;')
-    //     .then(([results, metadata]) => {
-    //         console.log('Base de données crée !');
-    //     })
-} catch (error) {
-    console.error('Impossible de se connecter, erreur suivante :', error);
-}
+// try {
+//     sequelize.authenticate();
+//     console.log('Connecté à la base de données MySQL !');
+//     // sequelize.query('CREATE DATABASE `Groupomania`;')
+//     //     .then(([results, metadata]) => {
+//     //         console.log('Base de données crée !');
+//     //     })
+// } catch (error) {
+//     console.error('Impossible de se connecter, erreur suivante :', error);
+// }
+
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
