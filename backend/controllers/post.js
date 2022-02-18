@@ -28,5 +28,21 @@ module.exports = {
             'postId': newPost.id
         }))
         .catch(error => res.status(400).json({ error }));
+    },
+
+    getAllPost : function (req, res) {
+        models.post.findAll()
+        .then(posts => res.status(200).json(posts))
+        .catch(error => res.status(404).json({ error }));
+    },
+
+    getOnePost : function (req, res) {
+        models.post.findOne({ id : req.params.id})
+        .then(post => res.status(200).json(post))
+        .catch(error => res.status(404).json({ error }));
+    },
+
+    modifyPost : function (req, res) {
+
     }
 }
