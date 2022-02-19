@@ -51,9 +51,9 @@ module.exports = {
                   return res.status(401).json({ error :'Mot de passe incorrect'})
               }
               res.status(200).json({
-                  userId: user.id,
+                  idUSERS: user.id,
                   token: jwt.sign(
-                      { userId: user.id },
+                      { idUSERS: user.id },
                       'RANDOM_TOKEN_SECRET',
                       { expiresIn: '12h'}
                   )
@@ -63,5 +63,22 @@ module.exports = {
       })
 
       .catch(error => res.status(500).json({ error }));
+    },
+
+
+    getOneUser: function (req, res) {
+        const token = req.headers.authorization.split(' ')[1];
+        const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+        const userId = decodedToken.idUSERS
+        models.User.findOne({
+            attributes: ['username', 'email', 'bio', 'isAdmin'],
+            where: {id: userId}
+        })
+        .then(user => res.status(200).json(user))
+        .catch(error => res.status(400).json({ error }));
+    },
+
+    modifyUser: function (req, res) {
+        
     }
 }
