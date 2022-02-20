@@ -51,9 +51,9 @@ module.exports = {
                   return res.status(401).json({ error :'Mot de passe incorrect'})
               }
               res.status(200).json({
-                  idUSERS: user.id,
+                  userId: user.id,
                   token: jwt.sign(
-                      { idUSERS: user.id },
+                      { userId: user.id },
                       'RANDOM_TOKEN_SECRET',
                       { expiresIn: '12h'}
                   )
@@ -69,7 +69,7 @@ module.exports = {
     getOneUser: function (req, res) {
         const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-        const userId = decodedToken.idUSERS
+        const userId = decodedToken.userId
         models.User.findOne({
             attributes: ['username', 'email', 'bio', 'isAdmin'],
             where: {id: userId}
@@ -79,6 +79,6 @@ module.exports = {
     },
 
     modifyUser: function (req, res) {
-        
+
     }
 }
