@@ -5,7 +5,7 @@ const models = require('../models');
 
 module.exports = {
 
-    signup: function(req, res) {
+    signup: function(req, res, next) {
       
       // Params
       var email    = req.body.email;
@@ -32,7 +32,7 @@ module.exports = {
 
 
 
-    login: function(req, res) {
+    login: function(req, res, next) {
 
         // Params
       var email    = req.body.email;
@@ -66,19 +66,48 @@ module.exports = {
     },
 
 
-    getOneUser: function (req, res) {
-        const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-        const userId = decodedToken.userId
+    getOneUser: function (req, res, next) {
         models.User.findOne({
             attributes: ['username', 'email', 'bio', 'isAdmin'],
-            where: {id: userId}
+            where: {id: req.params.id}
         })
         .then(user => res.status(200).json(user))
         .catch(error => res.status(400).json({ error }));
     },
 
-    modifyUser: function (req, res) {
+    modifyUser: function (req, res, next) {
+        const newBio = { bio: req.body.bio };
+        const userId = req.auth.userId;
+        models.User.findOne({
+            where: {id: req.params.id}
+        })
+        .then( user => {
+            if (user.id === userId) {
+                models.User.update(
+                    newBio,
+                    { where: { id: req.params.id }}
+                )
+                .then(() => res.status(200).json({ messsage: 'Profil modifié !'}))
+                .catch(error => res.status(400).json({ error }));
+            }
+        })
+        .catch(error => res.status(404).json({ error }))
+    },
 
+    deleteUser: function (req, res, next) {
+        const userId = req.auth.userId;
+        models.User.findOne({
+            where: {id: req.params.id}
+        })
+        .then(user => {
+            if (user.id === userId) {
+                models.User.destroy({
+                    where: {id: req.params.id}
+                })
+                .then(() => res.status(200).json({ message: 'Utilisateur supprimé'}))
+                .catch(error => res.status(400).json({ error }));
+            }
+        })
+        .catch(error => res.status(404).json({ error }));
     }
 }

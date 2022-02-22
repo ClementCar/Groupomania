@@ -5,15 +5,13 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
 
-    createPost : function(req, res) {
+    createPost : function(req, res, next) {
 
         // Params
         var title = req.body.title;
         var content = req.body.content;
         var attachment = req.body.attachment;
-        const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-        const userId = decodedToken.userId
+        var userId = req.auth.userId
 
         if(!attachment) {
             attachment = '';
@@ -34,7 +32,7 @@ module.exports = {
         .catch(error => res.status(400).json({ error }));
     },
 
-    getAllPost : function (req, res) {
+    getAllPost : function (req, res, next) {
         models.post.findAll({
             // include: [{
             //     model: models.user,
@@ -45,7 +43,23 @@ module.exports = {
         .catch(error => res.status(404).json({ error }));
     },
 
-    modifyPost : function (req, res) {
+    modifyPost : function (req, res, next) {
+        const newPost = { content: req.body.content };
+        const userId = req.auth.userId;
+        models.post.findOne({
+            where: {id: req.params.id}
+        })
+        .then( post => {
+            if (post.UserId === userId) {
+                models.post.update(
+                    newPost,
+                    { where: { id: req.params.id }}
+                )
+                .then(() => res.status(200).json({ messsage: 'Post modifié !'}))
+                .catch(error => res.status(400).json({ error }));
+            }
+        })
+        .catch(error => res.status(404).json({ error }))
 
     },
 
@@ -59,19 +73,17 @@ module.exports = {
 
     deletePost: function (req, res, next) {
 
-        const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-        const userId = decodedToken.userId;
+        const userId = req.auth.userId;
         models.post.findOne({
             where: {id: req.params.id}
         })
-        .then((deletePost) => function(deletePost) {
+        .then(deletePost => {
             if (deletePost.UserId === userId) {
                 if (deletePost.attachment !== '') {
                     const filename = deletePost.attachment.split('/images/'[1])
                     fs.unlink(`images/${filename}`)
                 }
-                models.post.deleteOne({
+                models.post.destroy({
                     where: {id: req.params.id}
                 })
                 .then(() => res.status(200).json({ message: 'Post supprimé'}))
