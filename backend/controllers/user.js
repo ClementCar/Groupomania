@@ -52,8 +52,10 @@ module.exports = {
               }
               res.status(200).json({
                   userId: user.id,
-                  token: jwt.sign(
-                      { userId: user.id },
+                  token: jwt.sign({
+                      userId: user.id,
+                      isAdmin: user.isAdmin
+                  },
                       'RANDOM_TOKEN_SECRET',
                       { expiresIn: '12h'}
                   )
@@ -96,11 +98,12 @@ module.exports = {
 
     deleteUser: function (req, res, next) {
         const userId = req.auth.userId;
+        const isAdmin = req.auth.isAdmin;
         models.User.findOne({
             where: {id: req.params.id}
         })
         .then(user => {
-            if (user.id === userId) {
+            if (user.id === userId || isAdmin == true ) {
                 models.User.destroy({
                     where: {id: req.params.id}
                 })
