@@ -1,0 +1,33 @@
+section {
+    width: 60%;
+    margin: auto;
+    margin-top: 10%;
+    display: flex;
+    box-shadow: 2px 2px 6px black ;
+    border-radius: 20px;
+    overflow: hidden;
+    & img {
+        width: 50%;
+    }
+    & div {
+        background-color: white;
+        width: 50%;
+        justify-content: center;
+        text-align: center;
+        & input {
+            border-radius: 10px;
+            border: none;
+            background-color: #afb5bd;
+            padding-left: 15px;
+            height: 20px;
+        }
+        & button {
+            width: 30%;
+            background-color: #fd2d01;
+            border-radius: 10px;
+            margin-top: 3%;
+            padding: 5px;
+            border: none;
+        }
+    }
+}
