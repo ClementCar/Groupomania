@@ -9,21 +9,19 @@
 
 @keyframes form {
     0%{
-        width: 0;
+        transform: translateX(-1000px);
     }
     100%{
-        width: 45%;
+        transform: translateX(0);
     }
 }
 
 @keyframes marg {
     0%{
-        margin-top: 0;
-        transform: scale(0.5);
+        transform: scale3d(0.5)
     }
     100%{
-        margin-top: 10%;
-        transform: scale(1);
+        transform: scale3d(1);
     }
 }
 
@@ -35,12 +33,12 @@ section {
     box-shadow: 2px 2px 6px black ;
     border-radius: 20px;
     overflow: hidden;
-    animation: marg 1s both;
-    animation-delay: 2s;
+    animation: marg 1s 1s both;
     & img {
         width: 55%;
         animation: affichage 1s both;
-        animation-delay: 2s;
+        animation-delay: 1s;
+        z-index: 2;
         &:hover{
             transform: perspective(300px) rotateX(0deg) rotateY(0deg); 
             will-change: transform;
@@ -54,7 +52,8 @@ section {
         display: flex;
         flex-direction: column;
         animation: form 1s both;
-        animation-delay: 2s;
+        animation-delay: 1s;
+        z-index: 1;
         & h1 {
             margin: 0;
         }
