@@ -86,16 +86,3 @@ section {
         }
     }
 }
-
-a {
-    width: 100%;
-    text-align: center;
-    display: flex;
-    text-decoration: none;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    & p {
-        margin-right: 10px;
-    }
-}
