@@ -3,9 +3,9 @@
     <div>
         <h1>Connexion</h1>
         <p>Acceder à Groupomania</p>
-        <input type="text" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Mot de passe">
-        <button><strong>Connectez-vous</strong></button>
+        <input id="inputEmail" type="text" name="email" placeholder="Email" required>
+        <input id="inputPassword" type="password" name="password" placeholder="Mot de passe" required>
+        <button (click)="login()"><strong>Connectez-vous</strong></button>
     </div>
 </section>
 <a (click)="toSignup()" >

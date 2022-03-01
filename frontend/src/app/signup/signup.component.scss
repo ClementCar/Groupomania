@@ -1,9 +1,9 @@
 @keyframes affichage {
     0%{
-        width: 100%;
+        transform: translateX(40%);
     }
     100%{
-        width: 55%;
+        transform: translateX(0);
     }
 }
 
@@ -18,11 +18,9 @@
 
 @keyframes marg {
     0%{
-        margin-top: 0;
         transform: scale(0.5);
     }
     100%{
-        margin-top: 10%;
         transform: scale(1);
     }
 }
@@ -33,28 +31,24 @@ section {
     margin-top: 10%;
     display: flex;
     box-shadow: 2px 2px 6px black ;
+    background-color: white;
     border-radius: 20px;
     overflow: hidden;
-    animation: marg 1s both;
-    animation-delay: 2s;
+    animation: marg 1s 0.5s both;
     & img {
         width: 55%;
-        animation: affichage 1s both;
-        animation-delay: 2s;
-        &:hover{
-            transform: perspective(300px) rotateX(0deg) rotateY(0deg); 
-            will-change: transform;
-        }
+        z-index: 2;
+        animation: affichage 1s 0.5s both;
     }
     & div {
         background-color: white;
         justify-content: center;
         width: 45%;
+        z-index: 1;
         text-align: center;
         display: flex;
         flex-direction: column;
-        animation: form 1s both;
-        animation-delay: 2s;
+        animation: form 1s 0.5s both;
         & h1 {
             margin: 0;
         }

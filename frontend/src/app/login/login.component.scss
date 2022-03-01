@@ -1,15 +1,15 @@
 @keyframes affichage {
     0%{
-        width: 100%;
+        transform: translateX(40%);
     }
     100%{
-        width: 55%;
+        transform: translateX(0);
     }
 }
 
 @keyframes form {
     0%{
-        transform: translateX(-1000px);
+        transform: translateX(1000px);
     }
     100%{
         transform: translateX(0);
@@ -18,10 +18,11 @@
 
 @keyframes marg {
     0%{
-        transform: scale3d(0.5)
+        transform-origin: center;
+        transform: scale(0.5)
     }
     100%{
-        transform: scale3d(1);
+        transform: scale(1);
     }
 }
 
@@ -30,14 +31,14 @@ section {
     margin: auto;
     margin-top: 10%;
     display: flex;
+    background-color: white;
     box-shadow: 2px 2px 6px black ;
     border-radius: 20px;
     overflow: hidden;
-    animation: marg 1s 1s both;
+    animation: marg 1s 0.5s both;
     & img {
         width: 55%;
-        animation: affichage 1s both;
-        animation-delay: 1s;
+        animation: affichage 1s 0.5s both;
         z-index: 2;
         &:hover{
             transform: perspective(300px) rotateX(0deg) rotateY(0deg); 
@@ -51,8 +52,7 @@ section {
         text-align: center;
         display: flex;
         flex-direction: column;
-        animation: form 1s both;
-        animation-delay: 1s;
+        animation: form 1s 0.5s both;
         z-index: 1;
         & h1 {
             margin: 0;
@@ -94,6 +94,7 @@ a {
     justify-content: center;
     align-items: center;
     color: black;
+    cursor: pointer;
     & p {
         margin-right: 10px;
     }

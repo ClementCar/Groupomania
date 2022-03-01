@@ -1,9 +1,23 @@
 header {
-    background-color: gray;
-    height: 200px;
-    img {
-        // width: 50%;
-        // background:;
-        object-fit: contain;
+    background-color: white;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    & img {
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
+    & nav {
+        justify-content: space-around;
+        & a {
+            margin-right: 30px;
+            color: #fd2d01;
+        }
+    }
+}
+
+i {
+    font-size: 20px;
 }
