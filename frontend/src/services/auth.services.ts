@@ -1,4 +1,6 @@
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core"
+import { Observable } from "rxjs";
 
 
 @Injectable({
@@ -7,29 +9,30 @@ import { Injectable } from "@angular/core"
 
 export class AuthServices {
 
-    login(email: string, password: string): void {
-        const userInfo = {
-            email: email,
-            password: password
-        }
-        fetch('http://localhost:3000/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userInfo)
+    apiUrl= 'http://localhost:3000/api/auth';
+
+    constructor (private httpClient: HttpClient) {}
+
+    httpHeader= {
+        headers: new HttpHeaders({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         })
-        .then()
-        .catch(error => console.log("erreur", error))
     }
 
-    signup(email: string, username: string, password: string, bio: string): void {
-        const userInfo = {
+    login(email: string, password: string): Observable<any> {
+        return this.httpClient.post(this.apiUrl + '/login', {
+            email: email,
+            password: password
+        })
+    }
+
+    signup(email: string, username: string, password: string, bio: string): Observable<any> {
+        return this.httpClient.post(this.apiUrl + '/signup', {
             email: email,
             username: username,
             password: password,
             bio: bio
-        }
+        })
     }
 }

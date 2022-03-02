@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServices } from 'src/services/auth.services';
@@ -24,8 +25,12 @@ export class LoginComponent implements OnInit {
   login(): void {
     const inputEmail = (<HTMLInputElement>document.getElementById('inputEmail')).value;
     const inputPassword = (<HTMLInputElement>document.getElementById('inputPassword')).value
-    alert(inputEmail)
-    this.authService.login(inputEmail, inputPassword)
+    this.authService.login(inputEmail, inputPassword).subscribe({
+      next: data => console.log(data),
+      error: error => console.log(HttpErrorResponse),
+      complete: () => this.router.navigateByUrl('signup')
+      
+    })
 
   }
   // (<HTMLInputElement>document.getElementById(elementId)).value;
