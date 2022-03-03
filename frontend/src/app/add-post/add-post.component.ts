@@ -1,7 +1,6 @@
 import { convertPropertyBinding } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { cpuUsage } from 'process';
 import { PostServices } from 'src/services/post.services';
 
 @Component({
