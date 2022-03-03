@@ -8,10 +8,24 @@ import { Post } from '../models/post.models';
 })
 export class SinglePostComponent implements OnInit {
   @Input() post!: Post;
+  likeText!: string;
+  likes!: number;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.likeText = "J'aime";
+    this.likes = 0
+  }
+
+  onLike() {
+    if (this.likeText === "J'aime") {
+      this.likes++;
+      this.likeText = "J'aime pas";
+    } else {
+      this.likes--;
+      this.likeText = "J'aime"
+    }
   }
 
 }

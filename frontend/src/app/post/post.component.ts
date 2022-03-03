@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PostServices } from 'src/services/post.services';
 import { Post } from '../models/post.models';
 
 @Component({
@@ -11,7 +12,7 @@ export class PostComponent implements OnInit {
   likeText!: string;
   likes!: number;
 
-  constructor() { }
+  constructor( private postService: PostServices) { }
 
   ngOnInit(): void {
     this.likeText = "J'aime"

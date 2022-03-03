@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   toSignup(): void {
-    this.router.navigateByUrl('signup');
+    this.router.navigateByUrl('auth/signup');
   }
 
   login(): void {
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(inputEmail, inputPassword).subscribe({
       next: data => console.log(data),
       error: error => console.log(HttpErrorResponse),
-      complete: () => this.router.navigateByUrl('signup')
+      complete: () => this.router.navigateByUrl('auth/signup')
       
     })
 

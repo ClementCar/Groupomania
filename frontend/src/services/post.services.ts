@@ -15,4 +15,20 @@ export class PostServices {
     getAllPost(): Observable<any> {
         return this.httpClient.get(this.apiUrl)
     }
+
+    getOnePost(postId: number): Observable<any> {
+        return this.httpClient.get(this.apiUrl + `/${postId}`)
+    }
+    
+    addPost(title: string, content: string, attachment: string): Observable<any> {
+        return this.httpClient.post(this.apiUrl, {
+            title: title,
+            content: content,
+            attachment: attachment
+        })
+    }
+
+    deletePost(postId: number): Observable<any> {
+        return this.httpClient.delete(this.apiUrl + `/${postId}`)
+    }
 }

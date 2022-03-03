@@ -4,7 +4,7 @@ header {
     width: 100%;
     align-items: center;
     & img {
-        width: 50%;
+        width: 30%;
         margin: 0 auto;
         margin-top: 10px;
         margin-bottom: 10px;
@@ -14,6 +14,7 @@ header {
         & a {
             margin-right: 30px;
             color: #fd2d01;
+            cursor: pointer;
         }
     }
 }

@@ -1,8 +1,11 @@
 <header>
     <img src="../../assets/icon-left-font-rogn.png" alt="Groupomania">
     <nav>
-        <a title="Accueil" href="">
+        <a title="Accueil" (click)="toHome()" >
             <i class="fa-solid fa-house"></i>
+        </a>
+        <a title="Ajouter une publication" (click)="toNewPost()" >
+            <i class="fa-solid fa-plus"></i>
         </a>
         <a title="Mon Profil" href="">
             <i class="fa-solid fa-user"></i>

@@ -1,1 +1,16 @@
-<p>single-post works!</p>
+<section>
+    <div class="post">
+        <div class="post__info">
+            <h2 class="post__info__title">Mon premier post</h2>
+            <p class="post__info__date">Mis en ligne le 9 septembre à 9h42</p>
+            <p class="post__info__content">Je tenais à vous dire bonjour à tous</p>
+        </div>
+        <img class="post__img" src="../../assets/icon-above-font.png" alt="">
+    </div>
+    <div class="btn">
+        <a class="btn__like" (click)="onLike()" >{{ likeText }}</a>
+        <span class="btn__likes"><i class="fa-solid fa-heart"></i>{{ likes }}</span>
+        <a class="btn__modify">Modifier</a>
+        <a class="btn__delete">Supprimer</a>
+    </div>
+</section>
