@@ -22,26 +22,20 @@ export class LikeServices {
     likePost(postId: number, postType: "J'aime" | "J'aime pas"): Observable<any> {
         if(postType === "J'aime") {
             return this.httpClient.post(this.apiUrl + `${postId}` + '/like', {
+                like: 1
+            }, {
                 headers: new HttpHeaders({
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
-                }),
-                body: {
-                    like: 1
-                }
+                })
             })
         } else {
             return this.httpClient.post(this.apiUrl + `${postId}` + '/like', {
+                like: 0
+            }, {
                 headers: new HttpHeaders({
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
-                }),
-                body: {
-                    like: 0
-                }
+                })
             })
         }
     }
 }
-
-headers: new HttpHeaders({
-    'Authsorization': 'Bearer ' + localStorage.getItem('token')
-})
