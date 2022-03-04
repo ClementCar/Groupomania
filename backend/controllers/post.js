@@ -102,6 +102,7 @@ module.exports = {
                 where: {id: req.params.id}
             })
             .then(postLiked => {
+                postLiked.likes++;
                 models.Like.create({
                     postId: postLiked.id,
                     userId: userId
@@ -116,6 +117,7 @@ module.exports = {
                 where: {id: req.params.id}
             })
             .then(postDisliked => {
+                postDisliked.likes--;
                 models.Like.destroy({
                     where: {
                         postId: postDisliked.id,

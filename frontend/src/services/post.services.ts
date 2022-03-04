@@ -1,6 +1,7 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { Post } from "src/app/models/post.models";
 
 
 @Injectable({
@@ -12,8 +13,19 @@ export class PostServices {
 
     constructor(private httpClient: HttpClient) {}
 
-    getAllPost(): Observable<any> {
-        return this.httpClient.get(this.apiUrl)
+    httpHeader= {
+        headers: new HttpHeaders({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        })
+    }
+
+    getAllPost(): Observable<Post[]> {
+        return this.httpClient.get<Post[]>(this.apiUrl, {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            })
+        })
     }
 
     getOnePost(postId: number): Observable<any> {
@@ -25,6 +37,10 @@ export class PostServices {
             title: title,
             content: content,
             attachment: attachment
+        }, {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            })
         })
     }
 

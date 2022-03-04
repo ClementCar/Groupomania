@@ -26,9 +26,12 @@ export class LoginComponent implements OnInit {
     const inputEmail = (<HTMLInputElement>document.getElementById('inputEmail')).value;
     const inputPassword = (<HTMLInputElement>document.getElementById('inputPassword')).value
     this.authService.login(inputEmail, inputPassword).subscribe({
-      next: data => console.log(data),
+      next: data => {
+        localStorage.setItem('userId', data.userId);
+        localStorage.setItem('token', data.token)
+      },
       error: error => console.log(HttpErrorResponse),
-      complete: () => this.router.navigateByUrl('auth/signup')
+      complete: () => this.router.navigateByUrl('')
       
     })
 
