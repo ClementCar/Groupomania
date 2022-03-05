@@ -28,8 +28,12 @@ export class PostServices {
         })
     }
 
-    getOnePost(postId: number): Observable<any> {
-        return this.httpClient.get(this.apiUrl + `/${postId}`)
+    getOnePost(postId: number): Observable<Post> {
+        return this.httpClient.get<Post>(this.apiUrl + `/${postId}`, {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            })
+        })
     }
     
     addPost(title: string, content: string, attachment: string): Observable<any> {
@@ -45,6 +49,10 @@ export class PostServices {
     }
 
     deletePost(postId: number): Observable<any> {
-        return this.httpClient.delete(this.apiUrl + `/${postId}`)
+        return this.httpClient.delete(this.apiUrl + `/${postId}`, {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            })
+        })
     }
 }

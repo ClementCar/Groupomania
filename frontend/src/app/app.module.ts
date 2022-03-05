@@ -11,6 +11,7 @@ import { PostComponent } from './post/post.component';
 import { SinglePostComponent } from './single-post/single-post.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { PostListComponent } from './post-list/post-list.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PostListComponent } from './post-list/post-list.component';
     PostComponent,
     SinglePostComponent,
     AddPostComponent,
-    PostListComponent
+    PostListComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

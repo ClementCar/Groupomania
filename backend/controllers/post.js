@@ -7,6 +7,29 @@ module.exports = {
 
     createPost : function(req, res, next) {
 
+        // req.body.post = JSON.parse(req.body.post);
+        // let fileName = null
+        // if(req.file){
+        //     fileName = `/images/${req.file.filename}`;
+        // }
+        // const conn = await db;
+        // query(conn, querysStrings.createPost, [
+        // req.body.post.title || null,
+        // fileName,
+        // req.body.post.description || null,
+        // "media",
+        // req.body.post.authorId,
+        // req.body.post.pseudo,
+        // ])
+        // .then((post) => {
+        //     res.status(201);
+        //     res.json({ message: "post add with success" });
+        // })
+        // .catch((e) => {
+        //     res.status(500);
+        //     res.json({ error: "connexion impossible a la base de donnée" + e });
+        // });
+
         // Params
         var title = req.body.title;
         var content = req.body.content;
@@ -16,7 +39,7 @@ module.exports = {
         if(!attachment) {
             attachment = '';
         } else {
-            attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+            attachment = `${req.protocol}://${req.get('host')}/images/${attachment}`
         }
 
         var newPost = models.post.create({
