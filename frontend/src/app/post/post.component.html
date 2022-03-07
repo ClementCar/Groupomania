@@ -1,16 +1,15 @@
-<section>
-    <h1>Publications</h1>
-    <div class="post">
-        <div class="post__info">
-            <h2 class="post__info__title">{{ post.title }}</h2>
-            <p class="post__info__date">Mis en ligne le {{ post.createdAt }}</p>
-            <p class="post__info__content">{{ post.content }}</p>
-            <span class="post__info__likes"><i class="fa-solid fa-heart"></i>{{ post.likes }}</span>
-            <!-- <img src="../../assets/icon-above-font.png" alt=""> -->
+<div class="post">
+    <div class="post__info">
+        <div class="post__info__title">
+            <h2>{{ post.title }}</h2>
+            <p>Par <a><strong>{{ post.Users }}</strong></a></p>
         </div>
-        <div class="post__bannière">
-            <a class="post__bannière__like" (click)="onLike()" >{{ likeText }}</a>
-            <a class="post__bannière__link" [routerLink]="['post/', post.id ]" >Voir la Publication<i class="fa-solid fa-arrow-right-long"></i></a>
-        </div>
+        <p class="post__info__date">Mis en ligne le {{ post.createdAt | date: 'dd/MM/yy, à HH:mm'}}</p>
+        <p class="post__info__content">{{ post.content }}</p>
+        <span class="post__info__likes"><i class="fa-solid fa-heart"></i>{{ post.likes }}</span>
     </div>
-</section>
+    <div class="post__bannière">
+        <a class="post__bannière__like" (click)="onLike()" >{{ likeText }}</a>
+        <a class="post__bannière__link" [routerLink]="['post/', post.id ]" >Voir la Publication<i class="fa-solid fa-arrow-right-long"></i></a>
+    </div>
+</div>

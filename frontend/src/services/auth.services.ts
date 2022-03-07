@@ -35,4 +35,12 @@ export class AuthServices {
             bio: bio
         })
     }
+
+    getUser(userId: number): Observable<any> {
+        return this.httpClient.get(this.apiUrl + `/${userId}`, {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            })
+        })
+    }
 }

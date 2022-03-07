@@ -1,8 +1,11 @@
 <section>
     <div class="post">
         <div class="post__info">
-            <h2 class="post__info__title">{{ post.title }}</h2>
-            <p class="post__info__date">Mis en ligne le {{ post.createdAt }}</p>
+            <div class="post__info__title">
+                <h2>{{ post.title }}</h2>
+                <p>Par <a><strong>{{ post.Users }}</strong></a></p>
+            </div>
+            <p class="post__info__date">Mis en ligne le {{ post.createdAt | date: 'dd/MM/yy, à HH:mm' }}</p>
             <p class="post__info__content">{{ post.content }}</p>
         </div>
         <img class="post__img" [src]="post.attachment" alt="">

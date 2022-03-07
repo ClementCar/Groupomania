@@ -57,6 +57,10 @@ module.exports = {
 
     getAllPost : function (req, res, next) {
         models.post.findAll({
+            include:[{
+                model: models.User,
+                attributes: ['username']
+            }],
             // include: [{
             //     model: models.user,
             //     attributes: 'username'

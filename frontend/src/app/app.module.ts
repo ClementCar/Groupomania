@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from  '@angular/common/http';
+import * as fr from '@angular/common/locales/fr'
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -12,6 +13,7 @@ import { SinglePostComponent } from './single-post/single-post.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { UserComponent } from './user/user.component';
+import { registerLocaleData } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,13 @@ import { UserComponent } from './user/user.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR'}
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor () {
+    registerLocaleData(fr.default)
+  }
+}

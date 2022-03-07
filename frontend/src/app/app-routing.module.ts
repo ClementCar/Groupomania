@@ -5,6 +5,7 @@ import { LoginComponent } from "./login/login.component";
 import { PostListComponent } from "./post-list/post-list.component";
 import { SignupComponent } from "./signup/signup.component";
 import { SinglePostComponent } from "./single-post/single-post.component";
+import { UserComponent } from "./user/user.component";
 
 const routes: Routes = [
     { path: 'auth', component: LoginComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
     { path: '', component: PostListComponent},
     { path: 'post/new', component: AddPostComponent},
     { path: 'post/:id', component: SinglePostComponent},
+    { path: 'profile/:id', component: UserComponent}
     
 ]
 

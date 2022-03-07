@@ -1,7 +1,15 @@
-<div class="card">
-    <img class="card__img" src="../../assets/icon.png" alt="Groupomania">
-    <p>email</p>
-    <p>username</p>
-    <p>administrateur</p>
-    <p>Je suis un nouveau stagiaire dans l'entreprise</p>
-</div>
+<section>
+    <div class="title">
+        <h1>Profil de {{ user.username }}</h1>
+        <p *ngIf="user.isAdmin === true">( administrateur )</p>
+    </div>
+    <div class="card">
+        <img class="card__img" src="../../assets/icon.png" alt="Groupomania">
+        <a class="card__email" href=`mailto:${user.email}`>
+            <i class="fas fa-envelope"></i>
+            <p>{{ user.email }}</p>
+        </a>
+        <p class="card__date">Compte crée le {{ user.createdAt | date: 'longDate'}}</p>
+        <p class="card__content">{{ user.bio }}</p>
+    </div>
+</section>

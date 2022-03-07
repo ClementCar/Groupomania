@@ -7,4 +7,5 @@ export class Post {
     userId!: number;
     createdAt!: Date;
     updatedAt!: Date;
+    Users!: [string];
 }

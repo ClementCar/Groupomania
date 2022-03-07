@@ -1,13 +1,42 @@
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & p {
+        margin-left: 5px;
+    }
+}
+
 .card{
-    width: 40%;
+    width: 50%;
     margin: 0 auto;
-    margin-top: 5%;
+    margin-top: 2%;
+    padding-top: 3%;
+    padding-bottom: 3%;
     background-color: white;
-    box-shadow: 3px 3px 6px black;
+    box-shadow: inset 5px 5px 10px #c4c4c4,
+                inset -5px -5px 10px #ffffff;
+    border-radius: 30px;
     display: flex;
     flex-direction: column;
+    text-align: center;
     &__img{
         width: 30%;
         margin: 0 auto;
+        margin-top: 2%;
+    }
+    &__email{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: black;
+        & i {
+            margin-right: 5px;
+        }
+    }
+    &__date{
+        margin-top: 0;
+        font-size: 12px;
     }
 }

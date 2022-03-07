@@ -1,16 +1,16 @@
 <header>
     <img src="../../assets/icon-left-font-rogn.png" alt="Groupomania">
     <nav>
-        <a title="Accueil" (click)="toHome()" >
+        <a title="Accueil" routerLink="" >
             <i class="fa-solid fa-house"></i>
         </a>
-        <a title="Ajouter une publication" (click)="toNewPost()" >
+        <a title="Ajouter une publication" routerLink="post/new" >
             <i class="fa-solid fa-plus"></i>
         </a>
-        <a title="Mon Profil" href="">
+        <a title="Mon Profil" (click)="myProfile()">
             <i class="fa-solid fa-user"></i>
         </a>
-        <a title="Déconnexion" href="">
+        <a title="Déconnexion" (click)="disconnect()">
             <i class="fa-solid fa-right-from-bracket"></i>
         </a>
     </nav>

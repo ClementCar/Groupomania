@@ -17,12 +17,14 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  toHome(): void {
-    this.router.navigateByUrl('/');
+  myProfile(): void {
+    const userId = localStorage.getItem('userId');
+    this.router.navigateByUrl(`profile/${userId}`)
   }
 
-  toNewPost(): void {
-    this.router.navigateByUrl('post/new');
+  disconnect(): void {
+    localStorage.clear();
+    this.router.navigateByUrl('auth');
   }
 
 }

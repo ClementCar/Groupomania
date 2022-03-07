@@ -70,7 +70,7 @@ module.exports = {
 
     getOneUser: function (req, res, next) {
         models.User.findOne({
-            attributes: ['username', 'email', 'bio', 'isAdmin'],
+            attributes: ['username', 'email', 'bio', 'isAdmin', 'createdAt'],
             where: {id: req.params.id}
         })
         .then(user => res.status(200).json(user))
