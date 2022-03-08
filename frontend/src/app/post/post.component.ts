@@ -26,12 +26,12 @@ export class PostComponent implements OnInit {
     // })
   }
 
-  setUsername(): void {
-    this.authService.getUser(this.post.userId).subscribe({
-      next: data => this.username = data.username,
-      error: error => console.log(HttpErrorResponse)
-    })
-  }
+  // setUsername(): void {
+  //   this.authService.getUser(this.post.userId).subscribe({
+  //     next: data => this.username = data.username,
+  //     error: error => console.log(HttpErrorResponse)
+  //   })
+  // }
 
   onLike() {
     if (this.likeText === "J'aime") {

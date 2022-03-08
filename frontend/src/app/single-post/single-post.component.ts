@@ -14,14 +14,16 @@ import { Post } from '../models/post.models';
 export class SinglePostComponent implements OnInit {
   @Input() post!: Post;
   likeText!: string;
-  // username!: string;
 
   constructor(private likeService: LikeServices, private route: ActivatedRoute, private postService: PostServices, private authService: AuthServices) { }
 
   ngOnInit(): void {
     this.likeText = "J'aime";
     const postId = this.route.snapshot.params['id'];
-    this.getPost(postId);
+    this.postService.getOnePost(postId).subscribe({
+      next: data => this.post = data,
+      error: error => console.log(HttpErrorResponse),
+    })
   }
 
   onLike() {
@@ -52,6 +54,5 @@ export class SinglePostComponent implements OnInit {
       next: data => this.post = data,
       error: error => console.log(HttpErrorResponse),
     })
-
   }
 }

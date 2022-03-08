@@ -13,8 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.post.belongsTo(models.User, {
         foreignKey: {
-          allowNul: false
-        }
+          allowNull: false
+        },
+        as: "User"
       })
     }
   }

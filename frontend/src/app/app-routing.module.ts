@@ -13,7 +13,8 @@ const routes: Routes = [
     { path: '', component: PostListComponent},
     { path: 'post/new', component: AddPostComponent},
     { path: 'post/:id', component: SinglePostComponent},
-    { path: 'profile/:id', component: UserComponent}
+    { path: 'profile/:id', component: UserComponent},
+    { path: 'post/modify/:id', component: AddPostComponent}
     
 ]
 

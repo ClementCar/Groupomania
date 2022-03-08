@@ -57,14 +57,14 @@ module.exports = {
 
     getAllPost : function (req, res, next) {
         models.post.findAll({
-            include:[{
-                model: models.User,
-                attributes: ['username']
-            }],
-            // include: [{
-            //     model: models.user,
-            //     attributes: 'username'
-            // }]
+            include:[
+                "User"
+            ],
+            // include:[{
+            //     model: models.User
+            //     // attributes: ['username'],
+            //     // where: { id: userId}
+            // }],
             order:[["createdAt", "DESC"]]
         })
         .then(posts => res.status(200).json(posts))
@@ -93,7 +93,10 @@ module.exports = {
 
     getOnePost : function (req, res, next) {
         models.post.findOne({
-            where: { id: req.params.id }
+            where: { id: req.params.id },
+            include: [
+                "User"
+            ]
         })
           .then((post) => res.status(200).json(post))
           .catch((error) => res.status(404).json({ error }));

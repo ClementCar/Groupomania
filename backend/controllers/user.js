@@ -71,7 +71,10 @@ module.exports = {
     getOneUser: function (req, res, next) {
         models.User.findOne({
             attributes: ['username', 'email', 'bio', 'isAdmin', 'createdAt'],
-            where: {id: req.params.id}
+            where: {id: req.params.id},
+            include: [{
+                model: models.post
+            }]
         })
         .then(user => res.status(200).json(user))
         .catch(error => res.status(400).json({ error }));

@@ -2,7 +2,7 @@
     <div class="post__info">
         <div class="post__info__title">
             <h2>{{ post.title }}</h2>
-            <p>Par <a><strong>{{ post.Users }}</strong></a></p>
+            <p>Par <a [routerLink]="['profile/', post.UserId]"><strong>{{ post.User.username }}</strong></a></p>
         </div>
         <p class="post__info__date">Mis en ligne le {{ post.createdAt | date: 'dd/MM/yy, à HH:mm'}}</p>
         <p class="post__info__content">{{ post.content }}</p>

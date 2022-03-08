@@ -4,8 +4,10 @@ export class Post {
     content!: string;
     attachment!: string;
     likes!: number;
-    userId!: number;
+    UserId!: number;
     createdAt!: Date;
     updatedAt!: Date;
-    Users!: [string];
+    User!: {
+        username: string
+    };
 }
