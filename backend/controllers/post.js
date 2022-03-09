@@ -33,13 +33,10 @@ module.exports = {
         // Params
         var title = req.body.title;
         var content = req.body.content;
-        var attachment = req.body.attachment;
         var userId = req.auth.userId
 
-        if(!attachment) {
-            attachment = '';
-        } else {
-            attachment = `${req.protocol}://${req.get('host')}/images/${attachment}`
+        if(req.file) {
+            var attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
         }
 
         var newPost = models.post.create({

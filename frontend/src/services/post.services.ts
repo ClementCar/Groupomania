@@ -36,12 +36,12 @@ export class PostServices {
         })
     }
     
-    addPost(title: string, content: string, attachment: string): Observable<any> {
-        return this.httpClient.post(this.apiUrl, {
-            title: title,
-            content: content,
-            attachment: attachment
-        }, {
+    addPost(title: string, content: string, attachment: File): Observable<any> {
+        const formData = new FormData();
+        formData.append('title', title)
+        formData.append('content', content)
+        formData.append('image', attachment)
+        return this.httpClient.post(this.apiUrl, formData, {
             headers: new HttpHeaders({
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             })

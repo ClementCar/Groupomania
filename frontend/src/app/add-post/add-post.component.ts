@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { convertPropertyBinding } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostServices } from 'src/services/post.services';
 import { Post } from '../models/post.models';
@@ -12,12 +12,23 @@ import { Post } from '../models/post.models';
 })
 export class AddPostComponent implements OnInit {
   @Input() post!: Post;
+  newForm: FormGroup;
+  imageUrl?: string;
+  sendFile!: File;
 
   constructor(
     private router: Router,
     private postService: PostServices,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    public formBuilder: FormBuilder
+  ) {
+    // Form reactiv
+    this.newForm = this.formBuilder.group({
+      title: [""],
+      content: [""],
+      file: [null]
+    })
+  }
 
   ngOnInit(): void {
     const postId = this.route.snapshot.params['id'];
@@ -27,11 +38,33 @@ export class AddPostComponent implements OnInit {
     })
   }
 
+  preview(event: { target: any; }) {
+    const filess = (<HTMLInputElement>document.getElementById('attachment')).files
+    console.log(filess![0])
+    const file = event.target.files
+    console.log(file[0])
+    this.sendFile = file[0];
+    console.log(this.sendFile)
+
+    // this.newForm.patchValue({
+    //   file: file[0]
+    // });
+
+    // this.newForm.get('file')?.updateValueAndValidity();
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.imageUrl = reader.result as string;
+    }
+    reader.readAsDataURL(this.sendFile)
+  }
+
   addPost(): void {
-    const title = (<HTMLInputElement>document.getElementById('title')).value;
-    const content = (<HTMLInputElement>document.getElementById('content')).value;
-    const attachment = (<HTMLInputElement>document.getElementById('attachment')).value;
-    this.postService.addPost(title, content, attachment).subscribe({
+    const title = this.newForm.get('title')?.value;
+    const content = this.newForm.get('content')?.value;
+    const attachment = this.newForm.get('file')?.value;
+    this.postService.addPost(title, content, this.sendFile).subscribe({
       next: data => console.log(data),
       error: error => console.log(error),
       complete: () => this.router.navigateByUrl('/')
