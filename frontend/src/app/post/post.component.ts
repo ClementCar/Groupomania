@@ -14,10 +14,12 @@ import { Post } from '../models/post.models';
 export class PostComponent implements OnInit {
   @Input() post!: Post;
   likeText!: string;
+  condition!: string;
 
   constructor( private postService: PostServices, private router: Router, private likeService: LikeServices, private authService: AuthServices ) { }
 
   ngOnInit(): void {
+    this.condition = "J'aime pas";
     if (this.post.likes > 0) {
       this.likeService.isLike(this.post.id).subscribe({
         next: dataLike => {

@@ -12,6 +12,9 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
+                & input {
+                    width: 50%;
+                }
             }
             & img {
                 width: 20%;

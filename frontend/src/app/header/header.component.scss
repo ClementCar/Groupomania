@@ -3,6 +3,9 @@ header {
     display: flex;
     width: 100%;
     align-items: center;
+    box-shadow: 6px 3px 10px black;
+    position: relative;
+    z-index: 10;
     & img {
         width: 30%;
         margin: 0 auto;

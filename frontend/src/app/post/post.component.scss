@@ -5,7 +5,7 @@
                 inset -5px -5px 10px #ffffff;
     border-radius: 30px;
     padding-top: 20px;
-    margin-top: 20px;
+    margin-top: 40px;
     overflow: hidden;
     & img {
         width: 60%;
@@ -62,6 +62,10 @@
             cursor: pointer;
         }
     }
+}
+
+.liked{
+    color: #fd2d01;
 }
 
 

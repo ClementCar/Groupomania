@@ -6,7 +6,7 @@
         </div>
         <p class="post__info__date">Mis en ligne le {{ post.createdAt | date: 'dd/MM/yy, à HH:mm'}}</p>
         <p class="post__info__content">{{ post.content }}</p>
-        <span class="post__info__likes"><i class="fa-solid fa-heart"></i>{{ post.likes }}</span>
+        <span class="post__info__likes"><i class="fa-solid fa-heart" [ngClass]='{liked: likeText === condition }'></i>{{ post.likes }}</span>
     </div>
     <div class="post__bannière">
         <a class="post__bannière__like" (click)="onLike()" >{{ likeText }}</a>

@@ -7,7 +7,7 @@
             <div>
                 <button type="button" onclick="document.getElementById('attachment').click()">Ajouter un fichier</button><br>
                 <input #file id="attachment" type="file" accept="images/*" style="display: none;" formControlName="file" (change)="preview($event)">
-                <input (click)="addPost()" type="submit" value="Publier">
+                <input class="post__form__footer__submit" (click)="addPost()" type="submit" value="Publier">
             </div>
             <img [src]="imageUrl" alt="">
         </div>
