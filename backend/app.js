@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const { Sequelize } = require('sequelize');
 const bodyParser = require('body-parser');
+const path = require('path');
+const cors = require('cors')
 
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
@@ -35,7 +37,14 @@ app.use((req, res, next) => {
 //     console.error('Impossible de se connecter, erreur suivante :', error);
 // }
 
+
+
+// Gère les requêtes d'images enregistrer dans le dossier image
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
 app.use('/api/auth', userRoutes);
 app.use('/api/post', postRoutes);
+
+app.use(cors());
 
 module.exports = app;

@@ -14,24 +14,26 @@ import { Post } from '../models/post.models';
 export class PostComponent implements OnInit {
   @Input() post!: Post;
   likeText!: string;
-  username!: string;
 
   constructor( private postService: PostServices, private router: Router, private likeService: LikeServices, private authService: AuthServices ) { }
 
   ngOnInit(): void {
-    this.likeText = "J'aime";
-    // this.authService.getUser(this.post.userId).subscribe({
-    //   next: data => this.username = data.username,
-    //   error: error => console.log(HttpErrorResponse)
-    // })
+    if (this.post.likes > 0) {
+      this.likeService.isLike(this.post.id).subscribe({
+        next: dataLike => {
+          console.log(dataLike)
+          if (dataLike.message == 'liked') {
+            this.likeText = "J'aime pas"
+          } else {
+            this.likeText = "J'aime"
+          }
+        },
+        error: error => console.log(HttpErrorResponse)
+      })
+    } else {
+      this.likeText = "J'aime"
+    }
   }
-
-  // setUsername(): void {
-  //   this.authService.getUser(this.post.userId).subscribe({
-  //     next: data => this.username = data.username,
-  //     error: error => console.log(HttpErrorResponse)
-  //   })
-  // }
 
   onLike() {
     if (this.likeText === "J'aime") {

@@ -92,7 +92,12 @@ module.exports = {
         models.post.findOne({
             where: { id: req.params.id },
             include: [
-                "User"
+                // model: models.User,
+                // through: {
+                //     attributes: ['userId']
+                // }
+                "User",
+                // {model: models.Like}
             ]
         })
           .then((post) => res.status(200).json(post))
@@ -124,38 +129,64 @@ module.exports = {
 
     LikePost: function (req, res, next) {
         const userId = req.auth.userId;
-        if (req.body.like == 1) {
-            models.post.findOne({
-                where: {id: req.params.id}
-            })
-            .then(postLiked => {
-                postLiked.likes++;
-                models.Like.create({
-                    postId: postLiked.id,
-                    userId: userId
-                })
-                .then(() => res.status(201).json({ message: 'Post Liké !'}))
-                .catch(error => res.status(400).json({ error }));
-            })
-            .catch(error => res.status(404).json({ error }));
-        }
-        if (req.body.like == 0) {
-            models.post.findOne({
-                where: {id: req.params.id}
-            })
-            .then(postDisliked => {
-                postDisliked.likes--;
-                models.Like.destroy({
-                    where: {
-                        postId: postDisliked.id,
+        models.post.findOne({
+            where: {id: req.params.id}
+        })
+        .then(post => {
+            var postLike = post.likes;
+            if (req.body.like == 1) {
+                postLike++;
+                models.post.update(
+                    { likes: postLike },
+                    { where: {id: req.params.id}}
+                )
+                .then( post => {
+                    models.Like.create({
+                        postId: req.params.id,
                         userId: userId
-                    }
+                    })
+                    .then(() => res.status(201).json({ message: 'Post Liké !'}))
+                    .catch(error => res.status(400).json({ error }));
                 })
-                .then(() => res.status(200).json({ message: 'Like supprimé'}))
-                .catch(error => res.status(404).json({ error }));
-            })
-            .catch(error => res.status(404).json({ error }));
-        }
+                .catch(error => res.status(404).json({ error }))
+            }
+            if (req.body.like == 0) {
+                postLike--;
+                models.post.update(
+                    { likes: postLike},
+                    { where: {id: req.params.id}}
+                )
+                .then( post => {
+                    models.Like.destroy({
+                        postId: req.params.id,
+                        userId: userId
+                    })
+                    .then(() => res.status(201).json({ message: 'Post Disliké !'}))
+                    .catch(error => res.status(400).json({ error }));
+                })
+                .catch(error => res.status(404).json({ error }))
+            }
+        })
+        .catch(error => res.status(404).json({error}));
+    },
 
-    }
+    ifUserLike: function (req, res, next) {
+        const userId = req.auth.userId;
+        models.Like.findAll({
+            where: {
+                postId: req.params.id
+            }
+        })
+        // .then(data => res.status(200).json(data))
+        .then( data => {
+            for (let like of data ) {
+                if (like.userId === userId ) {
+                    res.status(200).json({ message: 'liked'})
+                } else {
+                    res.status(200).json({ message: 'not liked'})
+                }
+            }
+        })
+        .catch( error => res.status(404).json({ error }));
+    },
 }

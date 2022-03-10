@@ -38,4 +38,12 @@ export class LikeServices {
             })
         }
     }
+
+    isLike(postId: number): Observable<any> {
+        return this.httpClient.get(this.apiUrl + `${postId}` + '/like', {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            })
+        })
+    }
 }

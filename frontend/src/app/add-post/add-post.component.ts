@@ -46,12 +46,6 @@ export class AddPostComponent implements OnInit {
     this.sendFile = file[0];
     console.log(this.sendFile)
 
-    // this.newForm.patchValue({
-    //   file: file[0]
-    // });
-
-    // this.newForm.get('file')?.updateValueAndValidity();
-
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -63,7 +57,6 @@ export class AddPostComponent implements OnInit {
   addPost(): void {
     const title = this.newForm.get('title')?.value;
     const content = this.newForm.get('content')?.value;
-    const attachment = this.newForm.get('file')?.value;
     this.postService.addPost(title, content, this.sendFile).subscribe({
       next: data => console.log(data),
       error: error => console.log(error),

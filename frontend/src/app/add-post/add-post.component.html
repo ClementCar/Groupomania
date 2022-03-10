@@ -1,14 +1,19 @@
-<div *ngIf="addRoute()">
+<div class="post" *ngIf="addRoute()">
     <h1>Nouvelle publication</h1>
-    <form [formGroup]="newForm">
+    <form class="post__form" [formGroup]="newForm">
         <input id="title" type="text" formControlName="title" placeholder="Titre *" required>
         <input id="content" type="text" formControlName="content" placeholder="Votre publication *" required>
-        <button type="button" onclick="document.getElementById('attachment').click()">Ajouter un fichier</button>
-        <input #file id="attachment" type="file" accept="images/*" style="display: none;" formControlName="file" (change)="preview($event)">
-        <input (click)="addPost()" type="submit" value="Publier">
+        <div class="post__form__footer">
+            <div>
+                <button type="button" onclick="document.getElementById('attachment').click()">Ajouter un fichier</button><br>
+                <input #file id="attachment" type="file" accept="images/*" style="display: none;" formControlName="file" (change)="preview($event)">
+                <input (click)="addPost()" type="submit" value="Publier">
+            </div>
+            <img [src]="imageUrl" alt="">
+        </div>
+        
     </form>
 </div>
-<img [src]="imageUrl" alt="">
 <div *ngIf="modifyRoute()">
     <h1>Modification</h1>
     <input id="title" type="text" name="title" [defaultValue]="post.title" required>

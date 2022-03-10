@@ -18,13 +18,36 @@ export class SinglePostComponent implements OnInit {
   constructor(private likeService: LikeServices, private route: ActivatedRoute, private postService: PostServices, private authService: AuthServices) { }
 
   ngOnInit(): void {
-    this.likeText = "J'aime";
     const postId = this.route.snapshot.params['id'];
     this.postService.getOnePost(postId).subscribe({
-      next: data => this.post = data,
+      next: data => {
+        this.post = data
+      },
       error: error => console.log(HttpErrorResponse),
+      complete: (() => this.initLikeText())
     })
   }
+
+  initLikeText() {
+    if (this.post.likes > 0) {
+      this.likeService.isLike(this.post.id).subscribe({
+        next: dataLike => {
+          console.log(dataLike)
+          if (dataLike.message == 'liked') {
+            this.likeText = "J'aime pas"
+          } else {
+            this.likeText = "J'aime"
+          }
+        },
+        error: error => console.log(HttpErrorResponse)
+      })
+    } else {
+      this.likeText = "J'aime"
+    }
+  }
+
+
+
 
   onLike() {
     if (this.likeText === "J'aime") {
