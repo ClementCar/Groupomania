@@ -15,6 +15,7 @@ import { PostListComponent } from './post-list/post-list.component';
 import { UserComponent } from './user/user.component';
 import { registerLocaleData } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PostCommentComponent } from './post-comment/post-comment.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SinglePostComponent,
     AddPostComponent,
     PostListComponent,
-    UserComponent
+    UserComponent,
+    PostCommentComponent
   ],
   imports: [
     BrowserModule,

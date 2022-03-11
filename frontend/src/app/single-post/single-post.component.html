@@ -16,4 +16,12 @@
         <a class="btn__modify" [routerLink]="['../','modify', post.id]">Modifier</a>
         <a class="btn__delete" (click)="deletePost()">Supprimer</a>
     </div>
+    <div class="card">
+        <app-post-comment *ngFor="let comment of post.Comments" [comment]="comment"></app-post-comment>
+        <div class="card__input">
+            <i class="fas fa-comment-dots card__input__icon"></i>
+            <input class="card__input__text" type="text" placeholder="Ecrivez votre commentaire...">
+            <input class="card__input__btn" type="submit" value="Commenter">
+        </div>
+    </div>
 </section>

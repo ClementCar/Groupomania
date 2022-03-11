@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         as: "User"
       })
+
+      models.post.hasMany(models.Like);
+      models.post.hasMany(models.Comment);
     }
   }
   post.init({

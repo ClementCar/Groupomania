@@ -7,29 +7,6 @@ module.exports = {
 
     createPost : function(req, res, next) {
 
-        // req.body.post = JSON.parse(req.body.post);
-        // let fileName = null
-        // if(req.file){
-        //     fileName = `/images/${req.file.filename}`;
-        // }
-        // const conn = await db;
-        // query(conn, querysStrings.createPost, [
-        // req.body.post.title || null,
-        // fileName,
-        // req.body.post.description || null,
-        // "media",
-        // req.body.post.authorId,
-        // req.body.post.pseudo,
-        // ])
-        // .then((post) => {
-        //     res.status(201);
-        //     res.json({ message: "post add with success" });
-        // })
-        // .catch((e) => {
-        //     res.status(500);
-        //     res.json({ error: "connexion impossible a la base de donnée" + e });
-        // });
-
         // Params
         var title = req.body.title;
         var content = req.body.content;
@@ -55,6 +32,8 @@ module.exports = {
     getAllPost : function (req, res, next) {
         models.post.findAll({
             include:[
+                {model: models.Comment,
+                include: 'user'},
                 "User"
             ],
             // include:[{
@@ -92,12 +71,10 @@ module.exports = {
         models.post.findOne({
             where: { id: req.params.id },
             include: [
-                // model: models.User,
-                // through: {
-                //     attributes: ['userId']
-                // }
-                "User",
-                // {model: models.Like}
+                {model: models.Comment,
+                    include: 'user'},
+                {model: models.Like},
+                "User"
             ]
         })
           .then((post) => res.status(200).json(post))
@@ -188,5 +165,5 @@ module.exports = {
             }
         })
         .catch( error => res.status(404).json({ error }));
-    },
+    }
 }
