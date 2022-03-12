@@ -4,4 +4,7 @@
         <p class="comment__title__date">{{ comment.createdAt }}</p>
     </div>
     <p class="comment__content">{{ comment.content }}</p>
+    <a *ngIf="comment.userId === id" class="comment__delete">
+        <i (click)="deleteCom(comment.id)" class="fa-solid fa-trash-can"></i>
+    </a>
 </div>

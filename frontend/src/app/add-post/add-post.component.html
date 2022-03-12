@@ -14,10 +14,11 @@
         
     </form>
 </div>
-<div *ngIf="modifyRoute()">
-    <h1>Modification</h1>
-    <input id="title" type="text" name="title" [defaultValue]="post.title" required>
-    <input id="content" type="text" name="content" [defaultValue]="post.content" required>
-    <input id="attachment" type="file">
-    <button (click)="addPost()"><strong>Modifier</strong></button>
+<div class="post" *ngIf="modifyRoute()">
+    <h1>Modifications</h1>
+    <div class="post__form">
+        <input id="title" type="text" [defaultValue]="post.title" required>
+        <input id="content" type="text" [defaultValue]="post.content" required>
+        <input (click)="modifyPost()" type="submit" value="Modifier">
+    </div>
 </div>

@@ -115,5 +115,15 @@ module.exports = {
             }
         })
         .catch(error => res.status(404).json({ error }));
+    },
+
+    getMyId: function (req, res, next) {
+        const userId = req.auth.userId;
+        models.User.findOne({
+            attributes: ['id'],
+            where: {id: userId}
+        })
+        .then(user  => res.status(200).json(userId))
+        .catch(error => res.status(404).json({ error }))
     }
 }

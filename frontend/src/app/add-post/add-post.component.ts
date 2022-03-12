@@ -75,8 +75,7 @@ export class AddPostComponent implements OnInit {
   modifyPost(): void {
     const title = (<HTMLInputElement>document.getElementById('title')).value;
     const content = (<HTMLInputElement>document.getElementById('content')).value;
-    const attachment = (<HTMLInputElement>document.getElementById('attachment')).value;
-    this.postService.modifyPost(title, content, attachment).subscribe({
+    this.postService.modifyPost(this.post.id,title, content).subscribe({
       next: data => console.log(data),
       error: error => console.log(HttpErrorResponse),
       complete: () => this.router.navigateByUrl(`/post/${this.route.snapshot.params['id']}`)

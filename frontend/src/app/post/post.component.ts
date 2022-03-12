@@ -44,12 +44,14 @@ export class PostComponent implements OnInit {
         error: error => console.log(HttpErrorResponse),
         complete: () => this.likeText = "J'aime pas"
       })
+      this.post.likes++;
     } else {
       this.likeService.likePost(this.post.id, "J'aime pas").subscribe({
         next: data => console.log(data),
         error: error => console.log(HttpErrorResponse),
         complete: () => this.likeText = "J'aime"
       })
+      this.post.likes--;
     }
   }
 }

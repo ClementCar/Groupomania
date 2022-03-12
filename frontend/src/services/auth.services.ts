@@ -43,4 +43,12 @@ export class AuthServices {
             })
         })
     }
+
+    getMyId():Observable<any> {
+        return this.httpClient.get(this.apiUrl + '/me', {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            })
+        })
+    }
 }

@@ -14,6 +14,8 @@ module.exports = {
 
         if(req.file) {
             var attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        } else {
+            var attachment = null
         }
 
         var newPost = models.post.create({
@@ -48,7 +50,10 @@ module.exports = {
     },
 
     modifyPost : function (req, res, next) {
-        const newPost = { content: req.body.content };
+        const newPost = {
+            title: req.body.title,
+            content: req.body.content
+        };
         const userId = req.auth.userId;
         models.post.findOne({
             where: {id: req.params.id}
@@ -90,15 +95,22 @@ module.exports = {
         })
         .then(deletePost => {
             if ( deletePost.UserId === userId || isAdmin == true ) {
-                if (deletePost.attachment !== '') {
+                if (deletePost.attachment) {
                     const filename = deletePost.attachment.split('/images/'[1])
-                    fs.unlink(`images/${filename}`)
+                    fs.unlink(`images/${filename}`, () => {
+                        models.post.destroy({
+                            where: {id: req.params.id}
+                        })
+                        .then(() => res.status(200).json({ message: 'Post delete with image'}))
+                        .catch(error => res.status(400).json({ error }));
+                    })
+                } else {
+                    models.post.destroy({
+                        where: {id: req.params.id}
+                    })
+                    .then(() => res.status(200).json({ message: 'Post delete'}))
+                    .catch(error => res.status(400).json({ error }));
                 }
-                models.post.destroy({
-                    where: {id: req.params.id}
-                })
-                .then(() => res.status(200).json({ message: 'Post supprimé'}))
-                .catch(error => res.status(400).json({ error }));
             }
         })
         .catch(error => res.status(404).json({ error }));
@@ -126,8 +138,7 @@ module.exports = {
                     .catch(error => res.status(400).json({ error }));
                 })
                 .catch(error => res.status(404).json({ error }))
-            }
-            if (req.body.like == 0) {
+            } else {
                 postLike--;
                 models.post.update(
                     { likes: postLike},
@@ -135,8 +146,10 @@ module.exports = {
                 )
                 .then( post => {
                     models.Like.destroy({
-                        postId: req.params.id,
-                        userId: userId
+                        where: {
+                            postId: req.params.id,
+                            userId: userId
+                        }
                     })
                     .then(() => res.status(201).json({ message: 'Post Disliké !'}))
                     .catch(error => res.status(400).json({ error }));

@@ -5,6 +5,7 @@
     margin-top: 15px;
     border-radius: 20px;
     background-color: white;
+    position: relative;
     box-shadow:  -7px 7px 14px #d9d9d9,
          7px -7px 14px #ffffff;
     &__title{
@@ -26,5 +27,10 @@
         margin: 0;
         margin-left: 3%;
         margin-top: 3px;
+    }
+    &__delete{
+        position: absolute;
+        top: 35%;
+        right: 5%;
     }
 }

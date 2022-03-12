@@ -56,11 +56,10 @@ export class PostServices {
         })
     }
 
-    modifyPost(title: string, content: string, attachment: string): Observable<any> {
-        return this.httpClient.put(this.apiUrl, {
+    modifyPost(postId: number, title: string, content: string): Observable<any> {
+        return this.httpClient.put(this.apiUrl + `/${postId}`, {
             title: title,
             content: content,
-            attachment: attachment
         }, {
             headers: new HttpHeaders({
                 'Authorization': 'Bearer ' + localStorage.getItem('token')

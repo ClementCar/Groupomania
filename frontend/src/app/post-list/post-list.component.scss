@@ -7,14 +7,23 @@
     }
 }
 
+@mixin media-queries {
+    @media screen and (min-width: 600px){
+        @content
+    }
+}
+
 .home{
-    width: 70%;
+    width: 100%;
     background-color: white;
     margin: 0 auto;
     padding-bottom: 30px;
     display: flex;
     flex-direction: column;
     border: 1px solid black;
+    @include media-queries{
+        width: 70%;
+    }
     // box-shadow: 6px 6px 10px black;
     &__title{
         display: flex;
