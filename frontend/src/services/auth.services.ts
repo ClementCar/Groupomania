@@ -51,4 +51,8 @@ export class AuthServices {
             })
         })
     }
+
+    getToken() {
+        return localStorage.getItem('token');
+    }
 }

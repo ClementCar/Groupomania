@@ -16,6 +16,7 @@ import { UserComponent } from './user/user.component';
 import { registerLocaleData } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PostCommentComponent } from './post-comment/post-comment.component';
+import { AuthGuard } from 'src/services/auth-guards.services';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PostCommentComponent } from './post-comment/post-comment.component';
     ReactiveFormsModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'fr-FR'}
+    { provide: LOCALE_ID, useValue: 'fr-FR'},
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
