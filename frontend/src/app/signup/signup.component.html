@@ -2,12 +2,12 @@
     <img src="../../assets/icon-above-font.png" alt="Groupomania">
     <div>
         <h1>Nouvel utilisateur</h1>
-        <!-- <p>Email</p> -->
-        <input id="email" type="text" name="email" placeholder="Email *" required>
-        <!-- <p>Mot de passe</p> -->
-        <input id="username" type="text" name="username" placeholder="Nom d'utilisateur *" required>
-        <input id="password" type="password" name="password" placeholder="Mot de passe *" required>
-        <input id="description" type="text" name="description" placeholder="Description">
-        <button><strong>S'enregistrer</strong></button>
+        <form [formGroup]="signForm">
+            <input id="email" type="text" formControlName="email" placeholder="Email *" required>
+            <input id="username" type="text" formControlName="username" placeholder="Nom d'utilisateur *" required>
+            <input id="password" type="password" formControlName="password" placeholder="Mot de passe *" required>
+            <input id="description" type="text" formControlName="description" placeholder="Description"><br>
+            <input id="btn" type="submit" value="S'enregistrer" (click)="signup()">
+        </form>
     </div>
 </section>

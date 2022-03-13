@@ -25,30 +25,44 @@
     }
 }
 
+@mixin media-queries {
+    @media screen and (min-width: 800px){
+        @content
+    }
+}
+
 section {
     width: 60%;
     margin: auto;
     margin-top: 10%;
-    display: flex;
     box-shadow: 2px 2px 6px black ;
     background-color: white;
     border-radius: 20px;
     overflow: hidden;
     animation: marg 1s 0.5s both;
+    @include media-queries(){
+        display: flex;
+    }
     & img {
-        width: 55%;
+        width: 100%;
         z-index: 2;
-        animation: affichage 1s 0.5s both;
+        @include media-queries(){
+            animation: affichage 1s 0.5s both;
+            width: 55%;
+        }
     }
     & div {
         background-color: white;
         justify-content: center;
-        width: 45%;
+        width: 100%;
         z-index: 1;
         text-align: center;
         display: flex;
         flex-direction: column;
         animation: form 1s 0.5s both;
+        @include media-queries(){
+            width: 45%;
+        }
         & h1 {
             margin: 0;
         }
@@ -68,15 +82,18 @@ section {
             margin: 0 auto;
             margin-top:5%;
         }
-        & button {
-            width: 40%;
-            background-color: white;
-            color: #fd2d01;
-            border-radius: 10px;
-            padding: 5px;
-            border-color: #fd2d01;
-            margin: 0 auto;
-            margin-top: 8%;
-        }
     }
+}
+
+#btn{
+    width: 40%;
+    background-color: white;
+    color: #fd2d01;
+    border-radius: 10px;
+    padding: 5px;
+    border: 2px solid #fd2d01;
+    border-color: #fd2d01;
+    margin: 0 auto;
+    margin-top: 8%;
+    cursor: pointer;
 }

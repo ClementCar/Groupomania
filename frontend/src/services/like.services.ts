@@ -25,7 +25,7 @@ export class LikeServices {
                 like: 1
             }, {
                 headers: new HttpHeaders({
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
                 })
             })
         } else {
@@ -33,7 +33,7 @@ export class LikeServices {
                 like: 0
             }, {
                 headers: new HttpHeaders({
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
                 })
             })
         }
@@ -42,7 +42,7 @@ export class LikeServices {
     isLike(postId: number): Observable<any> {
         return this.httpClient.get(this.apiUrl + `${postId}` + '/like', {
             headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             })
         })
     }

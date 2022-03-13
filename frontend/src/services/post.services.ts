@@ -23,7 +23,7 @@ export class PostServices {
     getAllPost(): Observable<Post[]> {
         return this.httpClient.get<Post[]>(this.apiUrl, {
             headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             })
         })
     }
@@ -31,7 +31,7 @@ export class PostServices {
     getOnePost(postId: number): Observable<Post> {
         return this.httpClient.get<Post>(this.apiUrl + `/${postId}`, {
             headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             })
         })
     }
@@ -43,7 +43,7 @@ export class PostServices {
         formData.append('image', attachment)
         return this.httpClient.post(this.apiUrl, formData, {
             headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             })
         })
     }

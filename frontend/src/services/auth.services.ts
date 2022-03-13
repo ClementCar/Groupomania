@@ -39,7 +39,7 @@ export class AuthServices {
     getUser(userId: number): Observable<any> {
         return this.httpClient.get(this.apiUrl + `/${userId}`, {
             headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             })
         })
     }
@@ -47,12 +47,12 @@ export class AuthServices {
     getMyId():Observable<any> {
         return this.httpClient.get(this.apiUrl + '/me', {
             headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             })
         })
     }
 
     getToken() {
-        return localStorage.getItem('token');
+        return sessionStorage.getItem('token');
     }
 }

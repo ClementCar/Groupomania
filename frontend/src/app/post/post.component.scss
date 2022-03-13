@@ -50,10 +50,9 @@
         display: flex;
         border-top: 1px solid #fd2d01;
         justify-content: space-between;
-        background-color: #fd2d01;
+        background-color: #FF9569;
         & a {
             text-decoration: none;
-            width: 30%;
             text-align: center;
             padding: 5px;
             color: black;
@@ -61,8 +60,19 @@
             -10px -10px 40px #ffffff;;
             cursor: pointer;
         }
+        &__like{
+            width: 30%;
+        }
+        &__link{
+            width: 70%;
+            & i {
+                margin-left: 10px;
+            }
+        }
     }
 }
+
+// ffd7d7
 
 .liked{
     color: #fd2d01;

@@ -18,12 +18,12 @@ export class HeaderComponent implements OnInit {
   }
 
   myProfile(): void {
-    const userId = localStorage.getItem('userId');
+    const userId = sessionStorage.getItem('userId');
     this.router.navigateByUrl(`profile/${userId}`)
   }
 
   disconnect(): void {
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigateByUrl('auth');
   }
 

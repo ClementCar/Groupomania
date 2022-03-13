@@ -24,7 +24,7 @@ export class CommentServices {
             content: content
         }, {
             headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             })
         })
     }
@@ -32,7 +32,7 @@ export class CommentServices {
     getComment(postId: number): Observable<Comment[]> {
         return this.httpClient.get<Comment[]>(this.apiUrl + `/${postId}` + '/comment',{
             headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             })
         })
     }
@@ -40,7 +40,7 @@ export class CommentServices {
     deleteComment(commentId: number): Observable<any> {
         return this.httpClient.delete(this.apiUrl + '/comment' + `/${commentId}`, {
             headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             })
         })
     }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthServices } from 'src/services/auth.services';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'frontend';
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthServices) {}
 
   notAuth() {
-    return this.router.url !== 'auth'
+    return this.authService.getToken()
   }
 }
