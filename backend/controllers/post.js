@@ -36,6 +36,7 @@ module.exports = {
             include:[
                 {model: models.Comment,
                 include: 'user'},
+                {model: models.Like},
                 "User"
             ],
             // include:[{
@@ -172,8 +173,10 @@ module.exports = {
             for (let like of data ) {
                 if (like.userId === userId ) {
                     res.status(200).json({ message: 'liked'})
+                    return;
                 } else {
                     res.status(200).json({ message: 'not liked'})
+                    return;
                 }
             }
         })

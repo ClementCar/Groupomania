@@ -1,12 +1,29 @@
+@keyframes anim {
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(1.1);
+    }
+}
+
+@keyframes anim-return {
+    0%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
 .post{
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
     box-shadow: inset 5px 5px 10px #c4c4c4,
                 inset -5px -5px 10px #ffffff;
-    border-radius: 30px;
     padding-top: 20px;
     margin-top: 40px;
-    overflow: hidden;
+    border: 1px solid black;
     & img {
         width: 60%;
     }
@@ -48,17 +65,24 @@
     &__bannière{
         width: 100%;
         display: flex;
-        border-top: 1px solid #fd2d01;
         justify-content: space-between;
-        background-color: #FF9569;
+        // background-color: #FF9569;
         & a {
             text-decoration: none;
             text-align: center;
             padding: 5px;
             color: black;
-            box-shadow: 10px 10px 40px #cfcfcf,
-            -10px -10px 40px #ffffff;;
+            background: white;
+            box-shadow:  -7px 7px 14px #e6e6e6,
+             7px -7px 14px #ffffff;
+             border: 1px solid black;
             cursor: pointer;
+            &:hover{
+                animation: anim 0.7s both;
+            }
+            &:not(:hover){
+                animation: anim-return 0.7s both;
+            }
         }
         &__like{
             width: 30%;

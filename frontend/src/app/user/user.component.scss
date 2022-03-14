@@ -1,3 +1,9 @@
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .title {
     display: flex;
     justify-content: center;
@@ -10,9 +16,9 @@
 .card{
     width: 50%;
     margin: 0 auto;
-    margin-top: 2%;
-    padding-top: 3%;
-    padding-bottom: 3%;
+    margin-top: 1%;
+    padding-top: 2%;
+    padding-bottom: 2%;
     background-color: white;
     box-shadow: inset 5px 5px 10px #c4c4c4,
                 inset -5px -5px 10px #ffffff;
@@ -23,7 +29,7 @@
     &__img{
         width: 30%;
         margin: 0 auto;
-        margin-top: 2%;
+        margin-top: 1%;
     }
     &__email{
         display: flex;
@@ -39,4 +45,20 @@
         margin-top: 0;
         font-size: 12px;
     }
+    &__nb-com{
+        margin: 0;
+    }
+}
+
+button {
+    margin: 0 auto;
+    margin-top: 20px;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 5px;
+    color: black;
+    background-color: #f52237;
+    box-shadow: 10px 10px 40px #cfcfcf,
+        -10px -10px 40px #ffffff;;
+    cursor: pointer;
 }

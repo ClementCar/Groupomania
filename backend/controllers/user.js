@@ -70,7 +70,7 @@ module.exports = {
 
     getOneUser: function (req, res, next) {
         models.User.findOne({
-            attributes: ['username', 'email', 'bio', 'isAdmin', 'createdAt'],
+            attributes: ['id', 'username', 'email', 'bio', 'isAdmin', 'createdAt'],
             where: {id: req.params.id},
             include: [{
                 model: models.post
@@ -124,6 +124,28 @@ module.exports = {
             where: {id: userId}
         })
         .then(user  => res.status(200).json(userId))
+        .catch(error => res.status(404).json({ error }))
+    },
+ 
+    getAllCountByUser: function (req, res, next) {
+        var count = {}
+        models.post.findAndCountAll({
+            where: { UserId: req.params.id}
+        })
+        .then( data => {
+            const post = data.count;
+            models.Comment.findAndCountAll({
+                where: { userId: req.params.id}
+            })
+            .then( com => {
+                count = {
+                    post: post,
+                    comment: com.count
+                };
+                res.status(200).json(count)
+            })
+            .catch(error => res.status(404).json({ error }));
+        })
         .catch(error => res.status(404).json({ error }))
     }
 }

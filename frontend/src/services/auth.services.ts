@@ -44,8 +44,32 @@ export class AuthServices {
         })
     }
 
+    deleteUser(userId: number): Observable<any> {
+        return this.httpClient.delete(this.apiUrl + `/${userId}`, {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            })
+        })
+    }
+
+    getMyInfo(): Observable<any> {
+        return this.httpClient.get(this.apiUrl + `/${sessionStorage.getItem('userId')}`, {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            })
+        })
+    }
+
     getMyId():Observable<any> {
         return this.httpClient.get(this.apiUrl + '/me', {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            })
+        })
+    }
+
+    getCountOfUser(userId: number): Observable<any> {
+        return this.httpClient.get(this.apiUrl + `/${userId}` + '/count', {
             headers: new HttpHeaders({
                 'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             })

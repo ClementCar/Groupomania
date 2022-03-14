@@ -22,4 +22,10 @@ export class Post {
             }
         }
     ]
+    Likes!: [
+        {
+            postId: number,
+            userId: number
+        }
+    ]
 }

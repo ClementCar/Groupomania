@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServices } from 'src/services/auth.services';
 import { CommentServices } from 'src/services/comment.services';
@@ -16,8 +17,22 @@ export class SinglePostComponent implements OnInit {
   @Input() post!: Post;
   likeText!: string;
   condition!: string;
+  myId!: number;
+  myIsAdmin!: boolean;
+  commentForm: FormGroup;
 
-  constructor(private likeService: LikeServices, private route: ActivatedRoute, private postService: PostServices, private router: Router, private commentService: CommentServices) { }
+  constructor(private likeService: LikeServices, 
+    private route: ActivatedRoute, 
+    private postService: PostServices, 
+    private router: Router, 
+    private commentService: CommentServices,
+    private authService: AuthServices,
+    public formBuilder: FormBuilder
+    ) {
+      this.commentForm = this.formBuilder.group({
+        comment: [""]
+      })
+    }
 
   ngOnInit(): void {
     this.condition = "J'aime pas"
@@ -27,7 +42,10 @@ export class SinglePostComponent implements OnInit {
         this.post = data
       },
       error: error => console.log(HttpErrorResponse),
-      complete: (() => this.initLikeText())
+      complete: (() => {
+        this.initLikeText();
+        this.getLocalUser();
+      })
     })
   }
 
@@ -49,6 +67,16 @@ export class SinglePostComponent implements OnInit {
     }
   }
 
+  getLocalUser() {
+    const myId = sessionStorage.getItem('userId');
+    this.authService.getMyInfo().subscribe({
+      next: data => {
+        this.myId = data.id,
+        this.myIsAdmin = data.isAdmin
+      },
+      error: error => console.log(HttpErrorResponse)
+    })
+  }
 
 
 
@@ -80,10 +108,11 @@ export class SinglePostComponent implements OnInit {
 
   newComment() {
     var postId = this.post.id;
-    var content = (<HTMLInputElement>document.getElementById('content')).value;
+    var content = this.commentForm.get('comment')?.value;
     this.commentService.addComment(postId, content).subscribe({
       next: data => console.log(data),
-      error: error => console.log(HttpErrorResponse)
+      error: error => console.log(HttpErrorResponse),
+      complete: () => window.location.reload()
     })
   }
 }

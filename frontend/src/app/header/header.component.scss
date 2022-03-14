@@ -1,3 +1,21 @@
+@keyframes anim-icon {
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(1.5);
+    }
+}
+
+@keyframes anim-icon-return {
+    0%{
+        transform: scale(1.5);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
 header {
     background-color: white;
     display: flex;
@@ -14,7 +32,7 @@ header {
     }
     & nav {
         justify-content: space-around;
-        & a {
+        & a{
             margin-right: 30px;
             color: #fd2d01;
             cursor: pointer;
@@ -24,4 +42,10 @@ header {
 
 i {
     font-size: 20px;
+    &:hover{
+        animation: anim-icon 0.7s both;
+    }
+    &:not(:hover){
+        animation: anim-icon-return 0.7s both;
+    }
 }

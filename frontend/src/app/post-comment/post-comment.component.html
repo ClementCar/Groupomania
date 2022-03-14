@@ -1,10 +1,10 @@
 <div class="comment">
     <div class="comment__title">
         <p class="comment__title__name"><strong>{{ comment.user.username }}</strong></p>
-        <p class="comment__title__date">{{ comment.createdAt }}</p>
+        <p class="comment__title__date">{{ comment.createdAt | date: 'dd/MM, à HH:mm' }}</p>
     </div>
     <p class="comment__content">{{ comment.content }}</p>
-    <a *ngIf="comment.userId === id" class="comment__delete">
+    <a *ngIf="comment.userId === myId || myIsAdmin === true" class="comment__delete">
         <i (click)="deleteCom(comment.id)" class="fa-solid fa-trash-can"></i>
     </a>
 </div>

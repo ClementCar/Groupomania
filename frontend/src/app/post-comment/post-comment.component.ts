@@ -11,22 +11,28 @@ import { Comment } from '../models/comment.models';
 })
 export class PostCommentComponent implements OnInit {
   @Input() comment!: Comment;
-  id!: number;
+  myId!: number;
+  myIsAdmin!: boolean;
 
   constructor(private commentService: CommentServices, private authService: AuthServices) { }
 
   ngOnInit(): void {
-    this.authService.getMyId().subscribe({
-      next: myId => this.id = myId,
+    const myId = sessionStorage.getItem('userId');
+    this.authService.getMyInfo().subscribe({
+      next: data => {
+        this.myId = data.id,
+        this.myIsAdmin = data.isAdmin
+      },
       error: error => console.log(HttpErrorResponse)
     })
+    console.log(this.myIsAdmin)
   }
 
   deleteCom(id: number): void {
     this.commentService.deleteComment(id).subscribe({
       next: data => console.log(data),
       error: error => console.log(HttpErrorResponse),
+      complete: () => window.location.reload()
     })
   }
-
 }

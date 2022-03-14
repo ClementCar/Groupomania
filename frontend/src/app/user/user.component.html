@@ -11,5 +11,8 @@
         </a>
         <p class="card__date">Compte crée le {{ user.createdAt | date: 'longDate'}}</p>
         <p class="card__content">{{ user.bio }}</p>
+        <p class="card__nb-post">Publications : {{ post }}</p>
+        <p class="card__nb-com">Commentaires : {{ comment }}</p>
     </div>
+    <button *ngIf="user.id === myId || myIsAdmin === true" (click)="deleteUser()">Supprimer le compte</button>
 </section>

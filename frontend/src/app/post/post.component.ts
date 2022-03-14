@@ -16,18 +16,24 @@ export class PostComponent implements OnInit {
   likeText!: string;
   condition!: string;
 
-  constructor( private postService: PostServices, private router: Router, private likeService: LikeServices, private authService: AuthServices ) { }
+  constructor( private postService: PostServices, 
+    private router: Router, 
+    private likeService: LikeServices, 
+    private authService: AuthServices 
+    ) { }
 
   ngOnInit(): void {
     this.condition = "J'aime pas";
     if (this.post.likes > 0) {
-      this.likeService.isLike(this.post.id).subscribe({
-        next: dataLike => {
-          console.log(dataLike)
-          if (dataLike.message == 'liked') {
-            this.likeText = "J'aime pas"
-          } else {
-            this.likeText = "J'aime"
+      this.authService.getMyId().subscribe({
+        next: data => {
+          console.log(data)
+          for ( let like of this.post.Likes ) {
+            if (like.userId === data ) {
+              this.likeText = "J'aime pas"
+            } else {
+              this.likeText = "J'aime"
+            }
           }
         },
         error: error => console.log(HttpErrorResponse)
