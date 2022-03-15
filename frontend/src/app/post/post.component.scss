@@ -1,18 +1,22 @@
 @keyframes anim {
     0%{
-        transform: scale(1);
+        box-shadow: inset 5px 5px 10px #c4c4c4,
+                inset -5px -5px 10px #ffffff;
     }
     100%{
-        transform: scale(1.1);
+        box-shadow:  -8px 8px 61px #c2c2c2,
+             8px -8px 61px #ffffff;
     }
 }
 
 @keyframes anim-return {
     0%{
-        transform: scale(1.1);
+        box-shadow:  -8px 8px 61px #c2c2c2,
+             8px -8px 61px #ffffff;
     }
     100%{
-        transform: scale(1);
+        box-shadow: inset 5px 5px 10px #c4c4c4,
+                inset -5px -5px 10px #ffffff;
     }
 }
 
@@ -24,6 +28,12 @@
     padding-top: 20px;
     margin-top: 40px;
     border: 1px solid black;
+    &:hover{
+        animation: anim 0.7s both;
+    }
+    &:not(:hover){
+        animation: anim-return 0.7s both;
+    }
     & img {
         width: 60%;
     }
@@ -77,12 +87,6 @@
              7px -7px 14px #ffffff;
              border: 1px solid black;
             cursor: pointer;
-            &:hover{
-                animation: anim 0.7s both;
-            }
-            &:not(:hover){
-                animation: anim-return 0.7s both;
-            }
         }
         &__like{
             width: 30%;

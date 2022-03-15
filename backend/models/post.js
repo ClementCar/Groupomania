@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       models.post.belongsTo(models.User, {
         foreignKey: {
           allowNull: false
-        },
+        }, onDelete:'CASCADE',
         as: "User"
       })
 

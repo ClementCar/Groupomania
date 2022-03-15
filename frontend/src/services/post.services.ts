@@ -51,7 +51,7 @@ export class PostServices {
     deletePost(postId: number): Observable<any> {
         return this.httpClient.delete(this.apiUrl + `/${postId}`, {
             headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             })
         })
     }
@@ -62,7 +62,7 @@ export class PostServices {
             content: content,
         }, {
             headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             })
         })
     }

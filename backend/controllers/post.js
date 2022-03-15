@@ -1,7 +1,6 @@
 const models = require('../models');
 const fs = require('fs');
-const user = require('./user');
-const jwt = require('jsonwebtoken');
+
 
 module.exports = {
 
@@ -95,9 +94,9 @@ module.exports = {
             where: {id: req.params.id}
         })
         .then(deletePost => {
-            if ( deletePost.UserId === userId || isAdmin == true ) {
+            if ( deletePost.UserId === userId || isAdmin === true ) {
                 if (deletePost.attachment) {
-                    const filename = deletePost.attachment.split('/images/'[1])
+                    const filename = deletePost.attachment.split('/images'[1])
                     fs.unlink(`images/${filename}`, () => {
                         models.post.destroy({
                             where: {id: req.params.id}
