@@ -52,7 +52,10 @@ export class UserComponent implements OnInit {
     this.authService.deleteUser(userId).subscribe({
       next: data => console.log(data),
       error: error => console.log(HttpErrorResponse),
-      complete: () => this.router.navigateByUrl('/')
+      complete: () => {
+        sessionStorage.clear()
+        this.router.navigateByUrl('')
+      }
     })
   }
 
