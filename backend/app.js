@@ -21,24 +21,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// const sequelize = new Sequelize('', 'root', 'SQLmotDEpasse20', {
-//     dialect: 'mysql',
-//     host: 'localhost'
-// });
-
-// try {
-//     sequelize.authenticate();
-//     console.log('Connecté à la base de données MySQL !');
-//     // sequelize.query('CREATE DATABASE `Groupomania`;')
-//     //     .then(([results, metadata]) => {
-//     //         console.log('Base de données crée !');
-//     //     })
-// } catch (error) {
-//     console.error('Impossible de se connecter, erreur suivante :', error);
-// }
-
-
-
 // Gère les requêtes d'images enregistrer dans le dossier image
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

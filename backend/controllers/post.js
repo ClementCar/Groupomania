@@ -38,11 +38,6 @@ module.exports = {
                 {model: models.Like},
                 "User"
             ],
-            // include:[{
-            //     model: models.User
-            //     // attributes: ['username'],
-            //     // where: { id: userId}
-            // }],
             order:[["createdAt", "DESC"]]
         })
         .then(posts => res.status(200).json(posts))
@@ -167,7 +162,6 @@ module.exports = {
                 postId: req.params.id
             }
         })
-        // .then(data => res.status(200).json(data))
         .then( data => {
             for (let like of data ) {
                 if (like.userId === userId ) {
