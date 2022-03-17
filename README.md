@@ -18,6 +18,8 @@ Base de données **MySQL**, et utilisation de l'ORM **Sequelize**.
 
 Après avoir cloner le projet:
 - Se placer dans le dossier backend et effectuer la commande `npm install`
+- Installer Sequelize et son CLI 
+- Effectuer la commande `sequelize db:migrate` pour la base de données
 - Effectuer la commande `nodemon server` pour lancer l'API
 ( La configuration de la base de données se trouve dans le fichier `/config`)
 
